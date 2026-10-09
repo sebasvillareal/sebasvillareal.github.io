@@ -214,6 +214,7 @@ function authErr(e){
   S.conn = 'error';
   if (code === 'auth/operation-not-allowed' || code === 'auth/admin-restricted-operation') setNotice('Anonymous sign-in is off. In Firebase, open Authentication → Sign-in method, choose Anonymous, and turn it on.');
   else if (code === 'auth/network-request-failed') setNotice('No internet connection. Connect and reload the app.');
+  else if (code.includes('unauthorized-domain') || code.includes('are-blocked')) setNotice('Firebase has not approved this web address yet. In Firebase, open Authentication → Settings → Authorized domains, click Add domain, and enter ' + location.hostname + '.');
   else setNotice("The app couldn't sign in (" + (code || 'unknown error') + '). Reload to try again.');
   console.warn(e);
   render();
